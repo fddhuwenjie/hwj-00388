@@ -8,6 +8,7 @@ export interface PlanetData {
   diameter: string;
   distanceFromSun: string;
   orbitalPeriod: string;
+  orbitalPeriodDays: number;
   semiMajorAxis: number;
   scaledSemiMajorAxis: number;
   eccentricity: number;

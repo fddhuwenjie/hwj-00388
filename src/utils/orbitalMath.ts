@@ -19,7 +19,7 @@ export function meanAnomalyFromTime(
   timeMs: number,
   baseTimeMs: number
 ): number {
-  const periodDays = parseFloat(planet.orbitalPeriod);
+  const periodDays = planet.orbitalPeriodDays;
   const periodMs = periodDays * 24 * 60 * 60 * 1000;
   const t = (timeMs - baseTimeMs) % periodMs;
   const M = (2 * Math.PI * t) / periodMs;
@@ -45,7 +45,7 @@ export function getPlanetPosition(
   const x = r * Math.cos(trueAnomaly);
   const z = r * Math.sin(trueAnomaly);
 
-  const periodDays = parseFloat(planet.orbitalPeriod);
+  const periodDays = planet.orbitalPeriodDays;
   const periodSeconds = periodDays * 24 * 60 * 60;
   const meanAngularVelocity = (2 * Math.PI) / periodSeconds;
 
