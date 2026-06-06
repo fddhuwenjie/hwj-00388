@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSimulationStore } from '@/store/useSimulationStore';
 import { planets, BASE_DATE, SCALE_FACTOR } from '@/data/planets';
-import { getPlanetPosition, createOrbitPoints } from '@/utils/orbitalMath';
+import { getPlanetPosition, createPlanetOrbitPoints } from '@/utils/orbitalMath';
 import { PlanetData } from '@/types';
 
 export function OrbitMap() {
@@ -50,7 +50,7 @@ export function OrbitMap() {
     }
 
     planets.forEach((planet: PlanetData) => {
-      const points = createOrbitPoints(planet, 128);
+      const points = createPlanetOrbitPoints(planet, 128);
       const isSelected = selectedPlanet === planet.name;
 
       ctx.beginPath();

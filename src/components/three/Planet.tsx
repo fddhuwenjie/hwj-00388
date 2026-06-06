@@ -1,24 +1,29 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
-import { PlanetData } from '@/types';
+import { PlanetData, PlanetPosition } from '@/types';
 import { generatePlanetTexture, generateRingTexture } from '@/utils/textureGenerator';
 import { getPlanetPosition } from '@/utils/orbitalMath';
-import { BASE_DATE } from '@/data/planets';
+import { BASE_DATE, getMoonsByPlanet } from '@/data/planets';
 import { useSimulationStore } from '@/store/useSimulationStore';
+import { Moon } from './Moon';
 
 interface PlanetProps {
   data: PlanetData;
+  simulationTime: number;
+  onPositionUpdate?: (pos: PlanetPosition) => void;
 }
 
-export function Planet({ data }: PlanetProps) {
+export function Planet({ data, simulationTime, onPositionUpdate }: PlanetProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const groupRef = useRef<THREE.Group>(null);
   const atmosphereRef = useRef<THREE.Mesh>(null);
   const { camera } = useThree();
 
-  const { simulationTime, selectedPlanet, setSelectedPlanet, focusedPlanet } =
+  const { selectedPlanet, setSelectedPlanet, focusedPlanet, showMoons } =
     useSimulationStore();
+
+  const planetMoons = useMemo(() => getMoonsByPlanet(data.name), [data.name]);
 
   const texture = useMemo(() => {
     const options: Record<string, any> = { seed: data.name.length * 1234 };
@@ -84,6 +89,7 @@ export function Planet({ data }: PlanetProps) {
 
   const isSelected = selectedPlanet === data.name;
   const isFocused = focusedPlanet === data.name;
+  const planetPositionRef = useRef<PlanetPosition>({ x: 0, y: 0, z: 0, distanceFromSun: 0, trueAnomaly: 0, velocity: 0 });
 
   useEffect(() => {
     if (meshRef.current) {
@@ -100,8 +106,12 @@ export function Planet({ data }: PlanetProps) {
 
     if (groupRef.current) {
       const pos = getPlanetPosition(data, simulationTime, BASE_DATE);
+      planetPositionRef.current = pos;
       groupRef.current.position.x = pos.x;
       groupRef.current.position.z = pos.z;
+      if (onPositionUpdate) {
+        onPositionUpdate(pos);
+      }
     }
 
     if (atmosphereRef.current && atmosphereMaterial?.uniforms) {
@@ -175,6 +185,15 @@ export function Planet({ data }: PlanetProps) {
           />
         </mesh>
       )}
+
+      {showMoons && planetMoons.map((moon) => (
+        <Moon
+          key={moon.name}
+          data={moon}
+          planetPosition={planetPositionRef.current}
+          simulationTime={simulationTime}
+        />
+      ))}
     </group>
   );
 }

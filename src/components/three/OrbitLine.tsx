@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Line } from '@react-three/drei';
 import * as THREE from 'three';
 import { PlanetData } from '@/types';
-import { createOrbitPoints } from '@/utils/orbitalMath';
+import { createPlanetOrbitPoints } from '@/utils/orbitalMath';
 import { useSimulationStore } from '@/store/useSimulationStore';
 
 interface OrbitLineProps {
@@ -12,7 +12,7 @@ interface OrbitLineProps {
 export function OrbitLine({ planet }: OrbitLineProps) {
   const { showOrbits, selectedPlanet } = useSimulationStore();
 
-  const points = useMemo(() => createOrbitPoints(planet, 256), [planet]);
+  const points = useMemo(() => createPlanetOrbitPoints(planet, 256), [planet]);
 
   const lineColor = useMemo(() => {
     return new THREE.Color(planet.color);

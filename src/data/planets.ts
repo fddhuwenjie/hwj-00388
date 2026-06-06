@@ -1,11 +1,158 @@
-import { PlanetData } from '@/types';
+import { PlanetData, MoonData, CometData, AsteroidData } from '@/types';
 
 export const SCALE_FACTOR = {
   size: 0.0008,
   distance: 6,
+  moonDistance: 0.08,
 };
 
 export const BASE_DATE = new Date('2024-01-01T00:00:00Z').getTime();
+
+export const moons: MoonData[] = [
+  {
+    name: 'moon',
+    nameZh: '月球',
+    parentPlanet: 'earth',
+    color: '#d4d4d4',
+    radius: 1737.4,
+    scaledRadius: 1737.4 * SCALE_FACTOR.size * 0.8,
+    mass: '7.35 × 10²² kg',
+    diameter: '3,474 km',
+    distanceFromPlanet: 384400,
+    scaledDistanceFromPlanet: 384400 * SCALE_FACTOR.moonDistance,
+    orbitalPeriodDays: 27.32,
+    eccentricity: 0.0549,
+    orbitalSpeed: 1.022,
+    rotationPeriod: 27.32,
+    inclination: 5.14,
+    funFact: '月球是地球唯一的天然卫星，也是人类唯一登陆过的地外天体。它的引力影响地球潮汐，并且正在以每年约3.8厘米的速度远离地球。',
+  },
+  {
+    name: 'io',
+    nameZh: '木卫一',
+    parentPlanet: 'jupiter',
+    color: '#e8b88a',
+    radius: 1821.6,
+    scaledRadius: 1821.6 * SCALE_FACTOR.size * 0.7,
+    mass: '8.93 × 10²² kg',
+    diameter: '3,643 km',
+    distanceFromPlanet: 421700,
+    scaledDistanceFromPlanet: 421700 * SCALE_FACTOR.moonDistance * 0.6,
+    orbitalPeriodDays: 1.77,
+    eccentricity: 0.0041,
+    orbitalSpeed: 17.334,
+    rotationPeriod: 1.77,
+    inclination: 0.05,
+    funFact: '木卫一是太阳系中火山活动最活跃的天体，拥有超过400座活火山。它的表面呈现黄色和橙色，主要由硫磺和二氧化硫组成。',
+  },
+  {
+    name: 'europa',
+    nameZh: '木卫二',
+    parentPlanet: 'jupiter',
+    color: '#c8b8a0',
+    radius: 1560.8,
+    scaledRadius: 1560.8 * SCALE_FACTOR.size * 0.7,
+    mass: '4.80 × 10²² kg',
+    diameter: '3,122 km',
+    distanceFromPlanet: 671034,
+    scaledDistanceFromPlanet: 671034 * SCALE_FACTOR.moonDistance * 0.6,
+    orbitalPeriodDays: 3.55,
+    eccentricity: 0.0094,
+    orbitalSpeed: 13.740,
+    rotationPeriod: 3.55,
+    inclination: 0.47,
+    funFact: '木卫二被认为是太阳系中最有可能存在生命的地方之一。它的冰层下方可能存在深度达100公里的液态水海洋。',
+  },
+  {
+    name: 'ganymede',
+    nameZh: '木卫三',
+    parentPlanet: 'jupiter',
+    color: '#a89880',
+    radius: 2634.1,
+    scaledRadius: 2634.1 * SCALE_FACTOR.size * 0.7,
+    mass: '1.48 × 10²³ kg',
+    diameter: '5,268 km',
+    distanceFromPlanet: 1070412,
+    scaledDistanceFromPlanet: 1070412 * SCALE_FACTOR.moonDistance * 0.6,
+    orbitalPeriodDays: 7.15,
+    eccentricity: 0.0013,
+    orbitalSpeed: 10.880,
+    rotationPeriod: 7.15,
+    inclination: 0.20,
+    funFact: '木卫三是太阳系中最大的卫星，甚至比水星还要大。它是唯一已知拥有自身磁场的卫星。',
+  },
+  {
+    name: 'callisto',
+    nameZh: '木卫四',
+    parentPlanet: 'jupiter',
+    color: '#807060',
+    radius: 2410.3,
+    scaledRadius: 2410.3 * SCALE_FACTOR.size * 0.7,
+    mass: '1.08 × 10²³ kg',
+    diameter: '4,821 km',
+    distanceFromPlanet: 1882709,
+    scaledDistanceFromPlanet: 1882709 * SCALE_FACTOR.moonDistance * 0.6,
+    orbitalPeriodDays: 16.69,
+    eccentricity: 0.0074,
+    orbitalSpeed: 8.204,
+    rotationPeriod: 16.69,
+    inclination: 0.28,
+    funFact: '木卫四是太阳系中陨石坑最多的天体，表面几乎完全被陨石坑覆盖。它可能在冰层下方也存在液态水海洋。',
+  },
+  {
+    name: 'titan',
+    nameZh: '土卫六',
+    parentPlanet: 'saturn',
+    color: '#d4a060',
+    radius: 2574.7,
+    scaledRadius: 2574.7 * SCALE_FACTOR.size * 0.7,
+    mass: '1.35 × 10²³ kg',
+    diameter: '5,150 km',
+    distanceFromPlanet: 1221870,
+    scaledDistanceFromPlanet: 1221870 * SCALE_FACTOR.moonDistance * 0.6,
+    orbitalPeriodDays: 15.95,
+    eccentricity: 0.0288,
+    orbitalSpeed: 5.57,
+    rotationPeriod: 15.95,
+    inclination: 0.33,
+    funFact: '土卫六是太阳系中唯一拥有浓厚大气层的卫星，大气主要由氮气组成。它表面有液态甲烷和乙烷形成的湖泊和河流。',
+  },
+];
+
+export const comets: CometData[] = [
+  {
+    name: 'halley',
+    nameZh: '哈雷彗星',
+    color: '#a0a0c0',
+    tailColor: '#87ceeb',
+    radius: 11,
+    scaledRadius: 0.12,
+    semiMajorAxis: 17.83,
+    scaledSemiMajorAxis: 17.83 * SCALE_FACTOR.distance * 10,
+    eccentricity: 0.967,
+    orbitalPeriodDays: 75.32 * 365.25,
+    inclination: 162.26,
+    perihelion: 0.586,
+    aphelion: 35.1,
+    funFact: '哈雷彗星是最著名的周期彗星，大约每76年回归一次。它上次出现是在1986年，预计下次回归在2061年。',
+  },
+  {
+    name: 'hale-bopp',
+    nameZh: '海尔-波普彗星',
+    color: '#c0c0e0',
+    tailColor: '#b0e0e6',
+    radius: 30,
+    scaledRadius: 0.18,
+    semiMajorAxis: 186,
+    scaledSemiMajorAxis: 186 * SCALE_FACTOR.distance * 10,
+    eccentricity: 0.995,
+    orbitalPeriodDays: 2537 * 365.25,
+    inclination: 89.43,
+    perihelion: 0.914,
+    aphelion: 370,
+    funFact: '海尔-波普彗星是1997年出现的壮观彗星，是20世纪最亮的彗星之一。它的核异常活跃，拥有壮观的尘埃尾和离子尾。',
+  },
+];
 
 export const planets: PlanetData[] = [
   {
@@ -67,6 +214,7 @@ export const planets: PlanetData[] = [
     axialTilt: 23.44,
     funFact: '地球是目前已知唯一存在生命的星球，表面 71% 被水覆盖，拥有适宜生命存在的大气层和温度。',
     atmosphereColor: '#87ceeb',
+    moons: [moons[0]],
   },
   {
     name: 'mars',
@@ -107,6 +255,7 @@ export const planets: PlanetData[] = [
     axialTilt: 3.13,
     funFact: '木星是太阳系最大的行星，其著名的"大红斑"是一个持续了数百年的巨大风暴，大小足以容纳 2-3 个地球。',
     atmosphereColor: '#f0e68c',
+    moons: [moons[1], moons[2], moons[3], moons[4]],
   },
   {
     name: 'saturn',
@@ -130,6 +279,7 @@ export const planets: PlanetData[] = [
     ringInnerRadius: 58232 * SCALE_FACTOR.size * 1.3,
     ringOuterRadius: 58232 * SCALE_FACTOR.size * 2.3,
     atmosphereColor: '#fafad2',
+    moons: [moons[5]],
   },
   {
     name: 'uranus',
@@ -173,6 +323,43 @@ export const planets: PlanetData[] = [
   },
 ];
 
+export function generateAsteroidBelt(count: number = 500): AsteroidData[] {
+  const asteroids: AsteroidData[] = [];
+  const innerRadius = 2.2 * SCALE_FACTOR.distance * 10;
+  const outerRadius = 3.3 * SCALE_FACTOR.distance * 10;
+
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const radius = innerRadius + Math.random() * (outerRadius - innerRadius);
+    const x = radius * Math.cos(angle);
+    const z = radius * Math.sin(angle);
+
+    asteroids.push({
+      id: `asteroid-${i}`,
+      x,
+      z,
+      size: 0.03 + Math.random() * 0.08,
+      brightness: 0.3 + Math.random() * 0.7,
+      baseAngle: angle,
+      orbitalSpeed: 0.5 + Math.random() * 0.5,
+    });
+  }
+
+  return asteroids;
+}
+
 export const getPlanetByName = (name: string): PlanetData | undefined => {
   return planets.find((p) => p.name === name);
+};
+
+export const getMoonByName = (name: string): MoonData | undefined => {
+  return moons.find((m) => m.name === name);
+};
+
+export const getCometByName = (name: string): CometData | undefined => {
+  return comets.find((c) => c.name === name);
+};
+
+export const getMoonsByPlanet = (planetName: string): MoonData[] => {
+  return moons.filter((m) => m.parentPlanet === planetName);
 };
